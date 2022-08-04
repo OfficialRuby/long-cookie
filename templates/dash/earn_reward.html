@@ -1,0 +1,55 @@
+{% extends 'dash/base.html' %}
+{% block content %}
+<!-- Header -->
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+
+
+        </div>
+    </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+    <div class="row justify-content-center">
+        <div class=" col ">
+            <div class="card">
+                <div class="card-header bg-transparent">
+                    <h3 class="mb-0">Earn more $LONG Token by completing these tasks</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row icon-examples">
+                        <div class="col-lg-4 col-md-6">
+                            <a href="{% url 'supply_param' %}" class="btn-icon-clipboard">
+                                <div>
+                                    <i class="ni ni-album-2"></i>
+                                    <span>Supply Parameters</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <a href="{% url 'connect_device' %}" class="btn-icon-clipboard">
+                                <div>
+                                    <i class="ni ni-album-2"></i>
+                                    <span>Connect Devices</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <a href="{% url 'connect_app' %}" class="btn-icon-clipboard">
+                                <div>
+                                    <i class="ni ni-album-2"></i>
+                                    <span>Connect Apps</span>
+                                </div>
+                            </a>
+                        </div>
+                      
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

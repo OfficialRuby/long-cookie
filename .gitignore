@@ -1,0 +1,6 @@
+test_data/
+sample-image/
+temps/
+venv/
+db.sqlite3
+.dockerignore

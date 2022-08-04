@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+
+  web:
+    build: .
+    command: >
+      sh -c "python3 manage.py makemigrations --noinput &&
+             while ! python3 manage.py migrate --noinput ; do sleep 1 ; done && 
+             python3 manage.py createsuperuser --user Ruby --noinput --email reuby@hostname.tld --noinput ;
+             python3 manage.py runserver 0.0.0.0:8000"
+
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    expose:
+      - "25"

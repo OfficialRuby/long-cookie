@@ -1,0 +1,89 @@
+{% extends 'dash/base.html' %}
+{% block content %}
+<!-- Header -->
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+
+
+        </div>
+    </div>
+</div>
+
+  <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row">
+        <div class="col">
+          <div class="card bg-default shadow">
+            <div class="card-header bg-transparent border-0">
+              <h3 class="text-white mb-0">Do you use one of these Devices?</h3>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center table-dark table-flush">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col" class="sort" data-sort="name">Device</th>
+                    <th scope="col" class="sort" data-sort="status">Status</th>
+                    <th scope="col" class="sort" data-sort="completion">Battery Life</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody class="list">
+                    
+                    {% for device in devices %}
+                    <tr>
+                      <th scope="row">
+                        <div class="media align-items-center">
+                          <a href="#" class="avatar rounded-circle mr-3">
+                            <img alt="Image placeholder" src="{{device.thumbnail.url}}">
+                          </a>
+                          <div class="media-body">
+                            <span class="name mb-0 text-sm">{{device.device_name}}</span>
+                          </div>
+                        </div>
+                      </th>
+                     
+                      <td>
+                        <span class="badge badge-dot mr-4">
+                          <i class="bg-{{device.connection_status}}"></i>
+                          <span class="status">{{device.get_connection_status_display}}</span>
+                        </span>
+                      </td>
+                     
+                      <td>
+                        <div class="d-flex align-items-center">
+                            {% if device.connection_status == "success" %}
+                            
+                            <span class="completion mr-2">{{device.battery_life}}%</span>
+                            <div>
+                              <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="{{device.battery_life}}" aria-valuemin="0" aria-valuemax="100" style="width: {{device.battery_life}}%;"></div>
+                              </div>
+                            </div>
+                            {% else %}
+                            <span class="completion mr-2">Connect device to show battery life</span>
+
+                            {% endif %}
+
+                        </div>
+                      </td>
+                       <td>
+                         {% if device.connection_status == "success" %}
+                            <button class="btn btn-danger btn-sm "><a href="{{device.get_disconnect_url}}" class='text-white'>Disonnect Device</a></button>
+                            {% else %}
+                            <button class="btn btn-success btn-sm "><a href="{{device.get_connect_url}}" class='text-white'>Connect Device</a></button>
+                            
+                            {% endif %}
+                      </td>
+                    </tr>
+                    {% endfor %}
+                 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+{% endblock content %}

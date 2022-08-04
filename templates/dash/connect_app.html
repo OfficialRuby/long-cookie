@@ -1,0 +1,72 @@
+{% extends 'dash/base.html' %}
+{% block content %}
+<!-- Header -->
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+
+
+        </div>
+    </div>
+</div>
+
+  <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row">
+        <div class="col">
+          <div class="card bg-default shadow">
+            <div class="card-header bg-transparent border-0">
+              <h3 class="text-white mb-0">Do you use one of these Apps?</h3>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center table-dark table-flush">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col" class="sort" data-sort="name">Device</th>
+                    <th scope="col" class="sort" data-sort="status">Status</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody class="list">
+                    
+                    {% for app in apps %}
+                    <tr>
+                      <th scope="row">
+                        <div class="media align-items-center">
+                          <a href="#" class="avatar rounded-circle mr-3">
+                            <img alt="Image placeholder" src="{{app.thumbnail.url}}">
+                          </a>
+                          <div class="media-body">
+                            <span class="name mb-0 text-sm">{{app.get_app_name_display}}</span>
+                          </div>
+                        </div>
+                      </th>
+                     
+                      <td>
+                        <span class="badge badge-dot mr-4">
+                          <i class="bg-{{app.connection_status}}"></i>
+                          <span class="status">{{app.get_connection_status_display}}</span>
+                        </span>
+                      </td>
+                     
+                    
+                       <td>
+                         {% if app.connection_status == "success" %}
+                            <button class="btn btn-danger btn-sm "><a href="{{app.get_disconnect_url}}" class='text-white'>Disonnect App</a></button>
+                            {% else %}
+                            <button class="btn btn-success btn-sm "><a href="{{app.get_connect_url}}" class='text-white'>Connect App</a></button>
+                            
+                            {% endif %}
+                      </td>
+                    </tr>
+                    {% endfor %}
+                 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+{% endblock content %}
